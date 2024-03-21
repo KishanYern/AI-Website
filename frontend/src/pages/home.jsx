@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import HomeLanding from '../components/home/homeLand';
+import homeAbout from '../components/home/homeAbout';
 
 const Home = () => {
     return (
-        <main
-            className='h-[1000px] w-full'
-        >
-            
+        <main className='h-full w-full pt-20'>
+            <HomeLanding />
         </main>
     );
 };
