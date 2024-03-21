@@ -18,7 +18,7 @@ const homeLand = () => {
                 href='https://github.com/KishanYern/AI-Website'
                 target='_blank'
                 className='hover:scale-110 duration-300 transform transition 
-                cursor-pointer hover:bg-slate-400 p-2 rounded-full bg-slate-300'
+                cursor-pointer hover:bg-slate-400 p-2 bg-slate-300'
             >
                 <FaGithub size={70} />
             </a>
