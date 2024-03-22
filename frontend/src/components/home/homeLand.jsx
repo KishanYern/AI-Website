@@ -7,20 +7,24 @@ const homeLand = () => {
             className='h-lvh bg-gradient-to-br from-slate-600 to-slate-200 flex justify-center 
         items-center flex-col gap-10'
         >
-            <div className=' font-bold text-6xl'>
+            <div className=' font-bold text-6xl font-amulya'>
                 Machine Learning Prediction Website
             </div>
-            <div className='text-xl pb-24'>
+            <div className='text-xl pb-24 font-synonym'>
                 A website to make the machine learning models created available
                 for public use and testing.
             </div>
             <a
+                className='text-3xl bg-slate-200 h-20 w-28 flex justify-center items-center cursor-pointer rounded-3xl
+                    shadow-lg shadow-blue-500/40 hover:shadow-indigo-500/40 hover:scale-110 
+                    hover:shadow-2xl hover:text-slate-600 z-10 mr-10 mt-10 duration-200'
+                rel='noreferrer'
                 href='https://github.com/KishanYern/AI-Website'
                 target='_blank'
-                className='hover:scale-110 duration-300 transform transition 
-                cursor-pointer hover:bg-slate-400 p-2 bg-slate-300'
             >
-                <FaGithub size={70} />
+                <button>
+                    <FaGithub size={45} className='text-3xl' />
+                </button>
             </a>
         </section>
     );
