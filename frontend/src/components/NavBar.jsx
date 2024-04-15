@@ -17,7 +17,7 @@ const NavBar = () => {
     ];
 
     return (
-        <nav className='h-20 bg-slate-500 w-full flex justify-between items-center px-4 text-2xl font-mate fixed'>
+        <nav className='h-20 bg-transparent w-full flex justify-between items-center px-4 text-2xl font-mate fixed'>
             <div className='text-4xl font-signature'>
                 Machine Learning Predictions
             </div>
