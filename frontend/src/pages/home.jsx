@@ -8,7 +8,7 @@ const Home = () => {
     return (
         <main className='h-full w-full'>
             <NavBar />
-            <div className="pt-20">
+            <div className='pt-20'>
                 <HomeLanding />
                 <HomeAbout />
                 <HomeModels />
