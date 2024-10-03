@@ -1,7 +1,7 @@
 import React from 'react';
 import HomeLanding from '../components/home/homeLand';
 import NavBar from '../components/NavBar'
-import homeAbout from '../components/home/homeAbout';
+import HomeAbout from '../components/home/homeAbout';
 
 const Home = () => {
     return (
@@ -9,6 +9,7 @@ const Home = () => {
             <NavBar />
             <div className="pt-20">
                 <HomeLanding />
+                <HomeAbout />
             </div>
         </main>
     );

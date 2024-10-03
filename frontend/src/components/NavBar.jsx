@@ -18,7 +18,8 @@ const NavBar = () => {
 
     return (
         <nav className='h-20 bg-slate-500 w-full flex justify-between items-center px-4 text-2xl font-mate fixed'>
-            <div className='text-4xl font-signature'>
+            <div className='text-2xl font-signature px-4 cursor-pointer capitalize text-black-500 
+                        hover:scale-105 duration-200 hover:text-red-400 z-10 md:text-4xl'>
                 Machine Learning Predictions
             </div>
             <ul className='flex flex-row gap-7'>
