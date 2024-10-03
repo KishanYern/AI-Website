@@ -1,4 +1,4 @@
-export const aboutSection = [
+const aboutSection = [
     "In early 2024, Zahra and I (Kishan) embarked on a collaborative project to develop a variety of machine learning models. This project allowed us to explore different machine \
     learning algorithms in depth, enabling us to experiment with various approaches such as decision trees, linear/logistic regression, and random forests. Throughout the process, we \
     gained valuable insights into the strengths and weaknesses of each algorithm, learning how to fine-tune hyperparameters, handle overfitting, and evaluate model performance using \
@@ -11,3 +11,5 @@ export const aboutSection = [
     models but also the design and architecture of the website, including the backend technologies we used. I hope this platform not only showcases the work we've done but also \
     serves as a learning tool for anyone interested in understanding the practical application of machine learning models."
 ]
+
+export default aboutSection;

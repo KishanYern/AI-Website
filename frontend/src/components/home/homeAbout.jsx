@@ -1,10 +1,10 @@
 import React from 'react';
-import { aboutSection } from '../../../public/aboutData';
+import aboutSection from '../../../public/aboutData';
 
 const homeAbout = () => {
     return <div className="bg-gradient-to-b from-slate-200 to-blue-100 flex justify-center 
         items-center flex-col gap-10 pl-32 pr-32 pb-56">
-        <div className=' text-5xl'>
+        <div className=' text-5xl pb-10'>
             About This Website!
         </div>
         <div>
