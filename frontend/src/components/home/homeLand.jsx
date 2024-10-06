@@ -1,13 +1,10 @@
 import React from 'react';
-import { FaGithub } from 'react-icons/fa';
-import { GiVintageRobot } from 'react-icons/gi';
-import background from '../../public/background.jpg';
 
 const homeLand = () => {
     return (
         <section
             className='bg-gradient-to-b from-slate-600 to-slate-200 flex justify-center 
-        items-center flex-col gap-10 pt-56 pb-56'
+        items-center flex-col gap-10 pt-80 pb-64'
         >
             <div className=' font-bold text-6xl font-amulya flex justify-center items-center'>
                 Machine Learning Prediction Website
