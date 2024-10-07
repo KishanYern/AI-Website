@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router';
 import Home from './pages/home';
-import Diabeties from './components/models/diabeties';
-import Embolism from './components/models/embolism';
-import Laptop from './components/models/laptop';
-import Lung from './components/models/lung';
-import Medical from './components/models/medical'
+import Diabeties from './pages/diabeties';
+import Embolism from './pages/embolism';
+import Laptop from './pages/laptop';
+import Lung from './pages/lung';
+import Medical from './pages/medical'
 import NotFound from './pages/notFound';
 
 function App() {

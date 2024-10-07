@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Outlet, Link } from "react-router-dom";
 import CardData from '../../../public/modelData'
 
 const homeModels = () => {
@@ -14,10 +14,11 @@ const homeModels = () => {
                 return <div key={card.key} className='text-xl text-black rounded-xl p-2 h-auto md:h-5/6 w-auto cursor-pointer
                     shadow-[-10px_-10px_30px_4px_rgba(0,0,0,0.1),_10px_10px_30px_4px_rgba(45,78,255,0.15)] hover:scale-105 
                     hover:shadow-2xl duration-200 bg-gradient-to-br from-red-100 to-red-50 font-projects'>
-                    {card.title}
+                    <Link to={card.link}>{card.title}</Link>
                 </div>
             })}
         </div>
+        <Outlet />
     </div>
   )
 }

@@ -1,22 +1,27 @@
 const modelCardData = [
     {
-        title: "Diabeties Prediction",
+        title: "Laptop Price Prediction",
+        link: '/Laptop',
         key: 1
     },
     {
-        title: "Laptop Price Prediction",
+        title: "Diabeties Prediction",
+        link: '/Diabeties',
         key: 2
     },
     {
-        title: "Lung Cancer Predictor",
+        title: "Pulmonary Embolism Risk Predictor",
+        link: '/Embolism',
         key: 3
     },
     {
-        title: "Medical Expense Prediction",
+        title: "Lung Cancer Predictor",
+        link: '/Lung',
         key: 4
     },
     {
-        title: "Pulmonary Embolism Risk Predictor",
+        title: "Medical Expense Prediction",
+        link: '/Medical',
         key: 5
     }
 ]
