@@ -31,6 +31,8 @@ def get_laptop_value():
 
     pred_data = [np.array(req_data)] # converts array to numpy array to feed into the model
 
+    # Interpolate the data if its 0. For example, if weight is 0, replace it with the mean of the weight data.
+
 
 
 
