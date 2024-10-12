@@ -55,12 +55,39 @@ function LaptopForm() {
                 </div>
                 <div>
                     <label className="block font-bold mb-1">Company</label>
-                    <input type="text" value={company} onChange={(e) => setCompany(e.target.value)} className="border p-2 w-full" />
+                    <select value={company} onChange={(e) => setCompany(e.target.value)} className="border p-2 w-full">
+                        <option value="Acer">Acer</option>
+                        <option value="Apple">Apple</option>
+                        <option value="Asus">Asus</option>
+                        <option value="Chuwi">Chuwi</option>
+                        <option value="Dell">Dell</option>
+                        <option value="Fujitsu">Fujitsu</option>
+                        <option value="Google">Google</option>
+                        <option value="HP">HP</option>
+                        <option value="Huawei">Huawei</option>
+                        <option value="Lenovo">Lenovo</option>
+                        <option value="LG">LG</option>
+                        <option value="Mediacom">Mediacom</option>
+                        <option value="Microsoft">Microsoft</option>
+                        <option value="MSI">MSI</option>
+                        <option value="Razer">Razer</option>
+                        <option value="Samsung">Samsung</option>
+                        <option value="Toshiba">Toshiba</option>
+                        <option value="Vero">Vero</option>
+                        <option value="Xiaomi">Xiaomi</option>
+                    </select>
                 </div>
 
                 <div>
                     <label className="block font-bold mb-1">Type</label>
-                    <input type="text" value={typename} onChange={(e) => setTypename(e.target.value)} className="border p-2 w-full" />
+                    <select type="text" value={typename} onChange={(e) => setTypename(e.target.value)} className="border p-2 w-full">
+                        <option value="Convertible">Convertible</option>
+                        <option value="Gaming">Gaming</option>
+                        <option value="Netbook">Netbook</option>
+                        <option value="Notebook">Notebook</option>
+                        <option value="Ultrabook">Ultrabook</option>
+                        <option value="Workstation">Workstation</option>
+                    </select>
                 </div>
 
                 <div>
