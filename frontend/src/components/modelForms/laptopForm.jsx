@@ -1,22 +1,29 @@
 import React, { useState } from 'react';
-import { graphicCards, cpuList } from '../../../public/modelData';
+import { graphicCardsWithId, cpuListWithId } from '../../../public/modelData';
 
 function LaptopForm() {
-    const [company, setCompany] = useState("");
-    const [typename, setTypename] = useState("");
-    const [inches, setInches] = useState(0);
+    // Input fields
+    // giving them initial values (mean of the sample data's variables)
+    const [company, setCompany] = useState("Dell");
+    const [typename, setTypename] = useState("Notebook");
+    const [inches, setInches] = useState(15);
     const [ram, setRam] = useState(8);
-    const [cpu, setCpu] = useState("");
+    const [cpu, setCpu] = useState("Intel Core i5 7200U");
     const [ssd, setSSD] = useState(0);
     const [hdd, setHdd] = useState(0);
     const [hybrid, setHybrid] = useState(0);
     const [flashMemory, setFlashMemory] = useState(0);
-    const [gpu, setGpu] = useState("");
-    const [opSys, setOpSys] = useState("");
-    const [clockRate, setClockRate] = useState(0);
-    const [touchscreen, setTouchscreen] = useState("Yes");
-    const [resolution, setResolution] = useState("");
-    const [weight, setWeight] = useState(0);
+    const [gpu, setGpu] = useState("Intel HD Graphics 620");
+    const [opSys, setOpSys] = useState("Windows 10");
+    const [clockRate, setClockRate] = useState(2.3);
+    const [touchscreen, setTouchscreen] = useState(0);
+    const [resolution, setResolution] = useState("1920x1080");
+    const [weight, setWeight] = useState(2);
+
+    // Prediction handling
+    const [error, setError] = useState(false);
+    const [errorText, setErrorText] = useState("");
+    const [output, setOutput] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -41,8 +48,30 @@ function LaptopForm() {
         getResult(formData);
     };
 
-    const getResult = (data) => {
-            
+    const getResult = async (data) => {
+        try {
+            const response = await fetch('http://localhost:5000/api/Laptop-Model', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            const result = await response.json();
+            console.log('Fetch call successful')
+            console.log(result);
+            setOutput(result.prediction);
+            setError(false);
+        } catch (error) {
+            console.error('Error fetching the result:', error);
+            setError(true);
+            setErrorText("Problem fetching the result");
+        }
     }
 
     return (
@@ -114,7 +143,7 @@ function LaptopForm() {
                     <div>
                         <label className="block font-bold mb-1">GPU</label>
                         <select value={gpu} onChange={(e) => setGpu(e.target.value)} className="border p-2 w-full">
-                            {graphicCards.map(card => <option value={card}>{card}</option>)}
+                            {graphicCardsWithId.map(item => <option key={item.id} value={item.card}>{item.card}</option>)}
                         </select>
                     </div>
                     <div>
@@ -174,8 +203,8 @@ function LaptopForm() {
                     <div>
                         <label className="block font-bold mb-1">CPU Name</label>
                         <select onChange={(e) => setCpu(e.target.value)} className="border p-2 w-full">
-                            {cpuList.map(data => 
-                                <option value={data}>{data}</option>
+                            {cpuListWithId.map(item => 
+                                <option key={item.id} value={item.name}>{item.name}</option>
                             )}
                         </select>
                     </div>

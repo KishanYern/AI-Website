@@ -21,7 +21,7 @@ const modelCardData = [
     },
 ]
 
-export const cpuList = [
+const cpuList = [
     'AMD A10-Series 9600P',
     'AMD A10-Series 9620P',
     'AMD A10-Series A10-9620P',
@@ -115,8 +115,12 @@ export const cpuList = [
     'Intel Xeon E3-1535M v6',
     'Samsung Cortex A72&A53'
 ]
+export const cpuListWithId = cpuList.map((cpu, index) => ({
+    id: index + 1,
+    name: cpu
+}));
 
-export const graphicCards = [
+const graphicCards = [
     'AMD FirePro W4190M',
     'AMD FirePro W4190M ',
     'AMD FirePro W5130M',
@@ -228,5 +232,10 @@ export const graphicCards = [
     'Nvidia Quadro M620',
     'Nvidia Quadro M620M'
 ]
+
+export const graphicCardsWithId = graphicCards.map((card, index) => ({
+    id: index + 1,
+    card: card
+}));
 
 export default modelCardData;

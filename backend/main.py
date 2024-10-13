@@ -3,12 +3,11 @@
 
 from flask import request, jsonify
 from config import app
-# from models import ...
-import pandas as pd
-import numpy as np
+import numpy as np # creating input vector
+import joblib # importing models
 
 
-@app.route("/Laptop-Model", methods=["POST"])
+@app.route("/api/Laptop-Model", methods=["POST"])
 def get_laptop_value():
     # Requesting all the required info, Unknowns and nulls will be handled at the front end
     # company = request.json.get("company")
@@ -28,16 +27,13 @@ def get_laptop_value():
     # flash_storage = request.json.get("FlashStorage")
 
     req_data = request.json.values() # data will be in the correct order (from the frontend)
+    print(req_data)
 
     pred_data = [np.array(req_data)] # converts array to numpy array to feed into the model
 
     # Interpolate the data if its 0. For example, if weight is 0, replace it with the mean of the weight data.
-
-
-
+    return jsonify({"prediction": "Testing"}), 201
 
 if __name__ == "__main__":
-
-
 
     app.run(debug=True)
