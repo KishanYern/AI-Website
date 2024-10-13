@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { graphicCards, cpuList } from '../../../public/modelData';
 
 function LaptopForm() {
     const [company, setCompany] = useState("");
@@ -112,7 +113,9 @@ function LaptopForm() {
                 <div className='flex gap-10'>
                     <div>
                         <label className="block font-bold mb-1">GPU</label>
-                        <input type="text" value={gpu} onChange={(e) => setGpu(e.target.value)} className="border p-2 w-full" />
+                        <select value={gpu} onChange={(e) => setGpu(e.target.value)} className="border p-2 w-full">
+                            {graphicCards.map(card => <option value={card}>{card}</option>)}
+                        </select>
                     </div>
                     <div>
                         <label className="block font-bold mb-1">Resolution</label>
@@ -170,7 +173,11 @@ function LaptopForm() {
                 <div className=' flex justify-center items-center gap-10'>
                     <div>
                         <label className="block font-bold mb-1">CPU Name</label>
-                        <input type="text" value={cpu} onChange={(e) => setCpu(e.target.value)} className="border p-2 w-full" />
+                        <select onChange={(e) => setCpu(e.target.value)} className="border p-2 w-full">
+                            {cpuList.map(data => 
+                                <option value={data}>{data}</option>
+                            )}
+                        </select>
                     </div>
                     <div>
                         <label className="block font-bold mb-1">Clock Rate (GHz)</label>
