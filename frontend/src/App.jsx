@@ -4,7 +4,6 @@ import Diabeties from './pages/diabeties';
 import Embolism from './pages/embolism';
 import Laptop from './pages/laptop';
 import Lung from './pages/lung';
-import Medical from './pages/medical'
 import NotFound from './pages/notFound';
 
 function App() {
@@ -16,7 +15,6 @@ function App() {
                 <Route path='/Diabeties' element={<Diabeties />} />
                 <Route path='/Embolism' element={<Embolism />} />
                 <Route path='/Lung' element={<Lung />} />
-                <Route path='/Medical' element={<Medical />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
         </>

@@ -19,11 +19,6 @@ const modelCardData = [
         link: '/Lung',
         key: 4
     },
-    {
-        title: "Medical Expense Prediction",
-        link: '/Medical',
-        key: 5
-    }
 ]
 
 export const cpuList = [
