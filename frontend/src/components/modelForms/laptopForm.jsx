@@ -25,8 +25,41 @@ function LaptopForm() {
     const [errorText, setErrorText] = useState("");
     const [output, setOutput] = useState("");
 
+    const resetForm = () => {
+        setCompany("Dell");
+        setTypename("Notebook")
+        setInches(15);
+        setRam(8);
+        setCpu("Intel Core i5 7200U");
+        setSSD(0);
+        setHdd(0);
+        setHybrid(0);
+        setFlashMemory(0);
+        setGpu("Intel HD Graphics 620");
+        setOpSys("Windows 10");
+        setClockRate(2.3);
+        setTouchscreen(0);
+        setResolution("1920x1080");
+        setWeight(2);
+        setError(false);
+        setErrorText("");
+        setOutput("");
+    };
+
+    const validateForm = () => {
+        if (inches <= 0 || ram <= 0 || clockRate <= 0 || weight <= 0) {
+            setError(true);
+            setErrorText("Please ensure all numeric values are greater than zero.");
+            return false;
+        }
+        return true;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if(!validateForm()) return; // ensures positive numeric values
+
         const formData = {
         company,
         typename,
@@ -44,7 +77,7 @@ function LaptopForm() {
         resolution,
         weight
         };
-        console.log(formData); // make api call to backend
+
         getResult(formData);
     };
 
@@ -183,13 +216,12 @@ function LaptopForm() {
 
                     <div>
                         <label className="block font-bold mb-1">Touchscreen</label>
-                        <select onChange={(e) => setTouchscreen((e.target.value == 'Yes' ? 1 : 0))} className="border p-2 w-full">
+                        <select value={touchscreen == 0 ? "No" : "Yes"} onChange={(e) => setTouchscreen((e.target.value == 'Yes' ? 1 : 0))} className="border p-2 w-full">
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
                     </div>
                 </div>
-
 
                 <div>
                     <label className="block font-bold mb-1">Weight (kg)</label>
@@ -202,7 +234,7 @@ function LaptopForm() {
                 <div className=' flex justify-center items-center gap-10'>
                     <div>
                         <label className="block font-bold mb-1">CPU Name</label>
-                        <select onChange={(e) => setCpu(e.target.value)} className="border p-2 w-full">
+                        <select value={cpu} onChange={(e) => setCpu(e.target.value)} className="border p-2 w-full">
                             {cpuListWithId.map(item => 
                                 <option key={item.id} value={item.name}>{item.name}</option>
                             )}
@@ -240,7 +272,14 @@ function LaptopForm() {
                     </div>
                 </div>
                 <button type="submit" className="bg-blue-500 text-white p-2 rounded">Submit</button>
+                <button type="button" onClick={resetForm} className="bg-gray-500 text-white p-2 rounded">Reset</button>
             </form>
+            {output && (
+                <div className="mt-6 text-green-500 flex items-center justify-center text-3xl">
+                    Predicted Price: {output}
+                </div>
+            )}
+            {error && <div className="mt-6 text-red-500 flex items-center justify-center text-3xl">{errorText}</div>}
         </div>
     );
 }
