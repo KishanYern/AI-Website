@@ -1,229 +1,393 @@
 import React, { useState } from 'react';
 import { graphicCardsWithId, cpuListWithId } from '../../../public/modelData';
 import Tooltip from './tooltip';
-import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
+import { HiOutlineQuestionMarkCircle } from 'react-icons/hi2';
 
 function LaptopForm() {
-    const [Company, setCompany] = useState("Dell");
-    const [TypeName, setTypename] = useState("Notebook");
+    // Input fields
+    // giving them initial values (mean of the sample data's variables)
+    const [Company, setCompany] = useState('Dell');
+    const [Typename, setTypename] = useState('Notebook');
     const [Inches, setInches] = useState(15);
     const [Ram, setRam] = useState(8);
-    const [GPU, setGpu] = useState("Intel HD Graphics 620");
-    const [OpSys, setOpSys] = useState("Windows 10");
-    const [Weight, setWeight] = useState(2);
-    const [Touchscreen, setTouchscreen] = useState(0);
-    const [Resolution, setResolution] = useState("1920x1080");
-    const [CPU, setCpu] = useState("Intel Core i5 7200U");
-    const [ClockRate, setClockRate] = useState(2.3);
+    const [CPU, setCpu] = useState('Intel Core i5 7200U');
     const [SSD, setSSD] = useState(0);
     const [HDD, setHdd] = useState(0);
     const [Hybrid, setHybrid] = useState(0);
     const [FlashMemory, setFlashMemory] = useState(0);
+    const [Gpu, setGpu] = useState('Intel HD Graphics 620');
+    const [OpSys, setOpSys] = useState('Windows 10');
+    const [ClockRate, setClockRate] = useState(2.3);
+    const [Touchscreen, setTouchscreen] = useState(0);
+    const [Resolution, setResolution] = useState('1920x1080');
+    const [Weight, setWeight] = useState(2);
 
-    const companyOptions = ["Acer", "Apple", "Asus", "Chuwi", "Dell", "Fujitsu", "Google", "HP", "Huawei", "Lenovo", "LG", "Mediacom", "Microsoft", "MSI", "Razer", "Samsung", "Toshiba", "Vero", "Xiaomi"];
-    const typeOptions = ["Convertible", "Gaming", "Netbook", "Notebook", "Ultrabook", "Workstation"];
-    const ramOptions = [2, 4, 6, 8, 12, 16, 24, 32, 64];
-    const resolutionOptions = ["1366x768", "1440x900", "1600x900", "1920x1080", "1920x1200", "2160x1400", "2256x1504", "2304x1440", "2400x1600", "2560x1440", "2560x1600", "2736x1824", "2880x1800", "3200x1800"];
-    const osOptions = ["macOS", "Windows 10", "Mac OS X", "Linux", "Windows 10 S", "Chrome OS", "Windows 7", "Android"];
-    const touchscreenOptions = ["Yes", "No"];
-
+    // Prediction handling
     const [error, setError] = useState(false);
-    const [errorText, setErrorText] = useState("");
-    const [output, setOutput] = useState([]);
+    const [errorText, setErrorText] = useState('');
+    const [output, setOutput] = useState('');
 
     const resetForm = () => {
-        setCompany("Dell");
-        setTypename("Notebook");
+        setCompany('Dell');
+        setTypename('Notebook');
         setInches(15);
         setRam(8);
-        setCpu("Intel Core i5 7200U");
+        setCpu('Intel Core i5 7200U');
         setSSD(0);
         setHdd(0);
         setHybrid(0);
         setFlashMemory(0);
-        setGpu("Intel HD Graphics 620");
-        setOpSys("Windows 10");
+        setGpu('Intel HD Graphics 620');
+        setOpSys('Windows 10');
         setClockRate(2.3);
         setTouchscreen(0);
-        setResolution("1920x1080");
+        setResolution('1920x1080');
         setWeight(2);
         setError(false);
-        setErrorText("");
-        setOutput([]);
-    }; // Interpolate the data if its 0. For example, if weight is 0, replace it with the mean of the weight data.
+        setErrorText('');
+        setOutput('');
+    };
 
     const validateForm = () => {
         if (Inches <= 0 || Ram <= 0 || ClockRate <= 0 || Weight <= 0) {
-            setError(true);
-            setErrorText("Please ensure all numeric values are greater than zero.");
-            return false;
+            if (Inches <= 0 || Ram <= 0 || ClockRate <= 0 || Weight <= 0) {
+                setError(true);
+                setErrorText(
+                    'Please ensure all numeric values are greater than zero.'
+                );
+                return false;
+            }
+            return true;
         }
-        return true;
-    };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+        const handleSubmit = (e) => {
+            e.preventDefault();
 
-        if(!validateForm()) return;
+            if (!validateForm()) return; // ensures positive numeric values
 
-        const formData = {
-            Company,
-            TypeName,
-            Inches,
-            Ram,
-            Gpu: GPU,
-            OpSys,
-            Weight,
-            Touchscreen,
-            Resolution,
-            CPU,
-            ClockRate,
-            SSD,
-            HDD,
-            Hybrid,
-            "Flash Storage": FlashMemory
+            const formData = {
+                Company,
+                Typename,
+                Inches,
+                Ram,
+                Gpu,
+                OpSys,
+                Weight,
+                Touchscreen,
+                Resolution,
+                CPU,
+                ClockRate,
+                SSD,
+                HDD,
+                Hybrid,
+                'Flash Storage': FlashMemory,
+            };
+            console.log(formData);
+
+            getResult(formData);
         };
 
-        getResult(formData);
-    };
+        const getResult = async (data) => {
+            try {
+                const response = await fetch(
+                    'http://localhost:5000/api/Laptop-Model',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    }
+                );
 
-    const getResult = async (data) => {
-        try {
-            const response = await fetch('http://localhost:5000/api/Laptop-Model', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+                const result = await response.json();
+                console.log('Fetch call successful');
+                console.log(result);
+                setOutput(result.prediction);
+                setError(false);
+            } catch (error) {
+                setError(true);
+                setErrorText('Problem fetching the result');
             }
-
-            const result = await response.json();
-
-            const result_pred = Math.round(result.prediction);
-            const error_val = Math.round(result_pred * 0.2); // sets an error of 20%
-            const pred_values = [result_pred - error_val, result_pred + error_val];
-            setOutput(pred_values);
-            setError(false);
-        } catch (error) {
-            setError(true);
-            setErrorText("Problem fetching the result");
-        }
+        };
     };
 
     return (
-        <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md mt-10 relative">
-            <Tooltip message={{
-                title: 'Before You Start',
-                text: 'Please note that this model should not replace any professional appraisal. The results generated are based on our learning and may not be 100% accurate. Always consult a \
-                qualified professional for precise evaluations. Also note that the data used to train these models are from India, and thus uses Indian currency translated into USD.'
-            }}>
-                <HiOutlineQuestionMarkCircle className='absolute top-2 right-8' size={30} />
-            </Tooltip>
-            <h1 className="text-4xl font-semibold text-center text-gray-800 mb-8">Laptop Price Predictor</h1>
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="md:col-span-2 text-xl font-semibold text-gray-700">General Information</div>
-
+        <div className='max-w-lg mx-auto p-8'>
+            <div className='text-4xl mb-10'>Laptop Price Predictor</div>
+            <form onSubmit={handleSubmit} className='grid grid-cols-1 gap-4'>
+                <div className='text-xl'>General Information</div>
                 <div>
-                    <label className="block font-medium text-gray-700 mb-2">Company</label>
-                    <select value={Company} onChange={(e) => setCompany(e.target.value)} className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        {companyOptions.map(company => (
-                            <option key={company} value={company}>{company}</option>
-                        ))}
+                    <label className='block font-bold mb-1'>Company</label>
+                    <select
+                        value={Company}
+                        onChange={(e) => setCompany(e.target.value)}
+                        className='border p-2 w-full'
+                    >
+                        <option value='Acer'>Acer</option>
+                        <option value='Apple'>Apple</option>
+                        <option value='Asus'>Asus</option>
+                        <option value='Chuwi'>Chuwi</option>
+                        <option value='Dell'>Dell</option>
+                        <option value='Fujitsu'>Fujitsu</option>
+                        <option value='Google'>Google</option>
+                        <option value='HP'>HP</option>
+                        <option value='Huawei'>Huawei</option>
+                        <option value='Lenovo'>Lenovo</option>
+                        <option value='LG'>LG</option>
+                        <option value='Mediacom'>Mediacom</option>
+                        <option value='Microsoft'>Microsoft</option>
+                        <option value='MSI'>MSI</option>
+                        <option value='Razer'>Razer</option>
+                        <option value='Samsung'>Samsung</option>
+                        <option value='Toshiba'>Toshiba</option>
+                        <option value='Vero'>Vero</option>
+                        <option value='Xiaomi'>Xiaomi</option>
                     </select>
                 </div>
 
                 <div>
-                    <label className="block font-medium text-gray-700 mb-2">Type</label>
-                    <select value={TypeName} onChange={(e) => setTypename(e.target.value)} className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        {typeOptions.map(type => (
-                            <option key={type} value={type}>{type}</option>
-                        ))}
+                    <label className='block font-bold mb-1'>Type</label>
+                    <select
+                        type='text'
+                        value={Typename}
+                        onChange={(e) => setTypename(e.target.value)}
+                        className='border p-2 w-full'
+                    >
+                        <option value='Convertible'>Convertible</option>
+                        <option value='Gaming'>Gaming</option>
+                        <option value='Netbook'>Netbook</option>
+                        <option value='Notebook'>Notebook</option>
+                        <option value='Ultrabook'>Ultrabook</option>
+                        <option value='Workstation'>Workstation</option>
                     </select>
                 </div>
 
                 <div>
-                    <label className="block font-medium text-gray-700 mb-2">Inches</label>
-                    <input type="number" value={Inches} onChange={(e) => setInches(Number(e.target.value))} className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <label className='block font-bold mb-1'>Inches</label>
+                    <input
+                        type='number'
+                        value={Inches}
+                        onChange={(e) => setInches(Number(e.target.value))}
+                        className='border p-2 w-full'
+                    />
                 </div>
 
                 <div>
-                    <label className="block font-medium text-gray-700 mb-2">RAM (GB)</label>
-                    <select value={Ram} onChange={(e) => setRam(Number(e.target.value))} className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        {ramOptions.map(ramSize => (
-                            <option key={ramSize} value={ramSize}>{ramSize} GB</option>
-                        ))}
+                    <label className='block font-bold mb-1'>RAM (GB)</label>
+                    <select
+                        value={Ram}
+                        onChange={(e) => setRam(Number(e.target.value))}
+                        className='border p-2 w-full'
+                    >
+                        <option value='2'>2</option>
+                        <option value='4'>4</option>
+                        <option value='6'>6</option>
+                        <option value='8'>8</option>
+                        <option value='12'>12</option>
+                        <option value='16'>16</option>
+                        <option value='24'>24</option>
+                        <option value='32'>32</option>
+                        <option value='64'>64</option>
                     </select>
                 </div>
+                <div className='flex gap-10'>
+                    <div>
+                        <label className='block font-bold mb-1'>GPU</label>
+                        <select
+                            value={Gpu}
+                            onChange={(e) => setGpu(e.target.value)}
+                            className='border p-2 w-full'
+                        >
+                            {graphicCardsWithId.map((item) => (
+                                <option key={item.id} value={item.card}>
+                                    {item.card}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label className='block font-bold mb-1'>
+                            Resolution
+                        </label>
+                        <select
+                            value={Resolution}
+                            onChange={(e) => setResolution(e.target.value)}
+                            className='border p-2 w-full'
+                        >
+                            <option value='1366x768'>1366x768</option>
+                            <option value='1440x900'>1440x900</option>
+                            <option value='1600x900'>1600x900</option>
+                            <option value='1920x1080'>1920x1080</option>
+                            <option value='1920x1200'>1920x1200</option>
+                            <option value='2160x1400'>2160x1400</option>
+                            <option value='2256x1504'>2256x1504</option>
+                            <option value='2304x1440'>2304x1440</option>
+                            <option value='2400x1600'>2400x1600</option>
+                            <option value='2560x1440'>2560x1440</option>
+                            <option value='2560x1600'>2560x1600</option>
+                            <option value='2736x1824'>2736x1824</option>
+                            <option value='2880x1800'>2880x1800</option>
+                            <option value='3200x1800'>3200x1800</option>
+                        </select>
+                    </div>
+                </div>
+                <div className='flex gap-10'>
+                    <div>
+                        <label className='block font-bold mb-1'>
+                            Operating System
+                        </label>
+                        <select
+                            value={OpSys}
+                            onChange={(e) => setOpSys(e.target.value)}
+                            className='border p-2 w-full'
+                        >
+                            <option value='macOS'>macOS</option>
+                            <option value='Windows 10'>Windows 10</option>
+                            <option value='Mac OS X'>Mac OS X</option>
+                            <option value='Linux'>Linux</option>
+                            <option value='Windows 10 S'>Windows 10 S</option>
+                            <option value='Chrome OS'>Chrome OS</option>
+                            <option value='Windows 7'>Windows 7</option>
+                            <option value='Android'>Android</option>
+                        </select>
+                    </div>
 
-                <div>
-                    <label className="block font-medium text-gray-700 mb-2">GPU</label>
-                    <select value={GPU} onChange={(e) => setGpu(e.target.value)} className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        {graphicCardsWithId.map(item => <option key={item.id} value={item.card}>{item.card}</option>)}
-                    </select>
+                    <div>
+                        <label className='block font-bold mb-1'>
+                            Touchscreen
+                        </label>
+                        <select
+                            value={Touchscreen == 0 ? 'No' : 'Yes'}
+                            onChange={(e) =>
+                                setTouchscreen(e.target.value == 'Yes' ? 1 : 0)
+                            }
+                            className='border p-2 w-full'
+                        >
+                            <option value='Yes'>Yes</option>
+                            <option value='No'>No</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div>
-                    <label className="block font-medium text-gray-700 mb-2">Resolution</label>
-                    <select value={Resolution} onChange={(e) => setResolution(e.target.value)} className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        {resolutionOptions.map(res => (
-                            <option key={res} value={res}>{res}</option>
-                        ))}
-                    </select>
+                    <label className='block font-bold mb-1'>Weight (kg)</label>
+                    <input
+                        type='number'
+                        value={Weight}
+                        onChange={(e) => setWeight(Number(e.target.value))}
+                        className='border p-2 w-full'
+                    />
                 </div>
 
-                <div>
-                    <label className="block font-medium text-gray-700 mb-2">Operating System</label>
-                    <select value={OpSys} onChange={(e) => setOpSys(e.target.value)} className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        {osOptions.map(os => (
-                            <option key={os} value={os}>{os}</option>
-                        ))}
-                    </select>
+                <div className='text-xl mt-10'>CPU Information</div>
+                <div className=' flex justify-center items-center gap-10'>
+                    <div>
+                        <label className='block font-bold mb-1'>CPU Name</label>
+                        <select
+                            value={CPU}
+                            onChange={(e) => setCpu(e.target.value)}
+                            className='border p-2 w-full'
+                        >
+                            {cpuListWithId.map((item) => (
+                                <option key={item.id} value={item.name}>
+                                    {item.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <div>
+                        <label className='block font-bold mb-1'>
+                            Clock Rate (GHz)
+                        </label>
+                        <input
+                            type='number'
+                            value={ClockRate}
+                            onChange={(e) =>
+                                setClockRate(Number(e.target.value))
+                            }
+                            className='border p-2 w-full'
+                        />
+                    </div>
                 </div>
 
-                <div>
-                    <label className="block font-medium text-gray-700 mb-2">Touchscreen</label>
-                    <select value={Touchscreen === 0 ? "No" : "Yes"} onChange={(e) => setTouchscreen(e.target.value === 'Yes' ? 1 : 0)} className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        {touchscreenOptions.map(option => (
-                            <option key={option} value={option}>{option}</option>
-                        ))}
-                    </select>
-                </div>
+                <div className='text-xl mt-10'>Storage Information</div>
+                <div className=' flex justify-center items-center gap-10'>
+                    <div>
+                        <label className='block font-bold mb-1'>SSD (GB)</label>
+                        <input
+                            type='number'
+                            value={SSD}
+                            onChange={(e) => setSSD(Number(e.target.value))}
+                            className='border p-2 w-full'
+                        />
+                    </div>
 
-                <div>
-                    <label className="block font-medium text-gray-700 mb-2">Weight (kg)</label>
-                    <input type="number" value={Weight} onChange={(e) => setWeight(Number(e.target.value))} className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                    <div>
+                        <label className='block font-bold mb-1'>HDD (GB)</label>
+                        <input
+                            type='number'
+                            value={HDD}
+                            onChange={(e) => setHdd(Number(e.target.value))}
+                            className='border p-2 w-full'
+                        />
+                    </div>
                 </div>
+                <div className='flex justify-center items-center gap-10'>
+                    <div>
+                        <label className='block font-bold mb-1'>
+                            Hybrid Storage (GB)
+                        </label>
+                        <input
+                            type='number'
+                            value={Hybrid}
+                            onChange={(e) => setHybrid(Number(e.target.value))}
+                            className='border p-2 w-full'
+                        />
+                    </div>
 
-                <div>
-                    <label className="block font-medium text-gray-700 mb-2">CPU Name</label>
-                    <select value={CPU} onChange={(e) => setCpu(e.target.value)} className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        {cpuListWithId.map(item => (
-                            <option key={item.id} value={item.name}>{item.name}</option>
-                        ))}
-                    </select>
+                    <div>
+                        <label className='block font-bold mb-1'>
+                            Flash Memory (GB)
+                        </label>
+                        <input
+                            type='number'
+                            value={FlashMemory}
+                            onChange={(e) =>
+                                setFlashMemory(Number(e.target.value))
+                            }
+                            className='border p-2 w-full'
+                        />
+                    </div>
                 </div>
-
-                <div>
-                    <label className="block font-medium text-gray-700 mb-2">Clock Rate (GHz)</label>
-                    <input type="number" value={ClockRate} onChange={(e) => setClockRate(Number(e.target.value))} className="w-full border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                </div>
-
-                <div className="md:col-span-2">
-                    <button type="submit" className="w-full bg-blue-600 text-white font-semibold p-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500">
-                        Predict Price
-                    </button>
-                    <button type="button" onClick={resetForm} className="w-full mt-5 bg-gray-600 text-white font-semibold p-3 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-500">
-                        Reset
-                    </button>
-                </div>
-
-                {error && <div className="md:col-span-2 text-red-600 text-center">{errorText}</div>}
-                {output.length != 0 && <div className="md:col-span-2 text-green-600 text-center mt-4">Predicted Price: ${output.at(0)} - ${output.at(1)}</div>}
+                <button
+                    type='submit'
+                    className='bg-blue-500 text-white p-2 rounded'
+                >
+                    Submit
+                </button>
+                <button
+                    type='button'
+                    onClick={resetForm}
+                    className='bg-gray-500 text-white p-2 rounded'
+                >
+                    Reset
+                </button>
             </form>
+            {output && (
+                <div className='mt-6 text-green-500 flex items-center justify-center text-3xl'>
+                    Predicted Price: {output}
+                </div>
+            )}
+            {error && (
+                <div className='mt-6 text-red-500 flex items-center justify-center text-3xl'>
+                    {errorText}
+                </div>
+            )}
         </div>
     );
 }
