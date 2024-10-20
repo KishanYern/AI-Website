@@ -11,6 +11,8 @@ const Laptop = () => {
         </div>
         <div className='text-xl text-center px-4'>
           Please note that this model should not replace any professional appraisal. The results generated are based on our learning and may not be 100% accurate. Always consult a qualified professional for precise evaluations.
+          <br />
+          Also note that the data used to train these models are from India, and thus uses Indian currency translated into USD.
         </div>
       </div>
       <div className='flex-1'>

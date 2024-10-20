@@ -1,39 +1,43 @@
-# The main thing we want to do is to be able to take a json input through a request
-# with fields that we can later put into the model that will be imported and retrieve a predicted value
-
 from flask import request, jsonify
 from config import app
-import numpy as np # creating input vector
-import joblib # importing models
-
+import pandas as pd
+import xgboost as xgb
 
 @app.route("/api/Laptop-Model", methods=["POST"])
 def get_laptop_value():
-    # Requesting all the required info, Unknowns and nulls will be handled at the front end
-    # company = request.json.get("company")
-    # type_name = request.json.get("typeName")
-    # inches = request.json.get("inches")
-    # ram = request.json.get("ram")
-    # gpu = request.json.get("gpu")
-    # operating_system = request.json.get("operatingSystem")
-    # weight = request.json.get("weight")
-    # touch_screen = request.json.get("touchScreen")
-    # resolution = request.json.get("resolution")
-    # cpu = request.json.get("cpu")
-    # clock_rate = request.json.get("clockRate")
-    # ssd = request.json.get("SSD")
-    # hdd = request.json.get("HDD")
-    # hybrid = request.json.get("Hybrid")
-    # flash_storage = request.json.get("FlashStorage")
+    req_data = request.json
+    df = pd.DataFrame(req_data, index=[0])
 
-    req_data = request.json.values() # data will be in the correct order (from the frontend)
-    print(req_data)
+    # One-hot encoding categorical features
+    encoded_df = pd.get_dummies(df)
 
-    pred_data = [np.array(req_data)] # converts array to numpy array to feed into the model
+    # Convert column names to strings and handle problematic characters
+    encoded_df.columns = encoded_df.columns.astype(str)
+    encoded_df.columns = encoded_df.columns.str.replace('[', '_').str.replace(']', '_').str.replace('<', '_').str.replace('>', '_').str.replace(',', '_')
 
-    # Interpolate the data if its 0. For example, if weight is 0, replace it with the mean of the weight data.
-    return jsonify({"prediction": "Testing"}), 201
+    # Load the XGBoost model
+    model = xgb.Booster()
+    model.load_model('./models/laptop_l2.json')
+    feature_names = model.feature_names
+
+    # Identify missing columns
+    missing_features = [feature for feature in feature_names if feature not in encoded_df.columns]
+
+    # Add missing columns with value 0
+    missing_df = pd.DataFrame(0, index=encoded_df.index, columns=missing_features)
+
+    # Concatenate the missing columns to the encoded_df
+    encoded_df = pd.concat([encoded_df, missing_df], axis=1)
+
+    # Reorder columns to match the model's feature_names
+    encoded_df = encoded_df[feature_names]
+
+    # Convert the DataFrame to DMatrix for prediction
+    dmatrix_data = xgb.DMatrix(encoded_df)
+
+    pred_vector = model.predict(dmatrix_data)
+
+    return jsonify({"prediction": float(pred_vector[0])}), 201
 
 if __name__ == "__main__":
-
     app.run(debug=True)
