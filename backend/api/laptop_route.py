@@ -18,7 +18,7 @@ def init_laptop_route(app):
 
         # Load the XGBoost model
         model = xgb.Booster()
-        model.load_model('../models/laptop_l2.json')
+        model.load_model('./models/laptop_l2.json')
         feature_names = model.feature_names
 
         # Identify missing columns

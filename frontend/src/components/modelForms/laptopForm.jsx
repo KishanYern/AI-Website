@@ -213,7 +213,7 @@ function LaptopForm() {
                 </div>
 
                 {error && <div className="md:col-span-2 text-red-600 text-center">{errorText}</div>}
-                {output && <div className="md:col-span-2 text-green-600 text-center mt-4">Predicted Price: ${output.at(0)} - ${output.at(1)}</div>}
+                {output.length != 0 && <div className="md:col-span-2 text-green-600 text-center mt-4">Predicted Price: ${output.at(0)} - ${output.at(1)}</div>}
             </form>
         </div>
     );
