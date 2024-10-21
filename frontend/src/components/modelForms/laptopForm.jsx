@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { graphicCardsWithId, cpuListWithId } from '../../../public/modelData';
+import Tooltip from './tooltip';
+import { HiOutlineQuestionMarkCircle } from "react-icons/hi2";
 
 function LaptopForm() {
     const [Company, setCompany] = useState("Dell");
@@ -113,7 +115,14 @@ function LaptopForm() {
     };
 
     return (
-        <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md mt-10">
+        <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md mt-10 relative">
+            <Tooltip message={{
+                title: 'Before You Start',
+                text: 'Please note that this model should not replace any professional appraisal. The results generated are based on our learning and may not be 100% accurate. Always consult a \
+                qualified professional for precise evaluations. Also note that the data used to train these models are from India, and thus uses Indian currency translated into USD.'
+            }}>
+                <HiOutlineQuestionMarkCircle className='absolute top-2 right-8' size={30} />
+            </Tooltip>
             <h1 className="text-4xl font-semibold text-center text-gray-800 mb-8">Laptop Price Predictor</h1>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="md:col-span-2 text-xl font-semibold text-gray-700">General Information</div>
