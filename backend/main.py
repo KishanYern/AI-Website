@@ -1,39 +1,11 @@
 # main.py
-from flask import Flask
 from config import app
-import numpy as np # creating input vector
-import pandas as pd # creating input dataframe
-import joblib # importing models
+from api.laptop_route import init_laptop_route
+from api.diabeties_route import init_diabeties_route
 
-
-@app.route("/api/Laptop-Model", methods=["POST"])
-def get_laptop_value():
-    # Requesting all the required info, Unknowns and nulls will be handled at the front end
-    # company = request.json.get("company")
-    # type_name = request.json.get("typeName")
-    # inches = request.json.get("inches")
-    # ram = request.json.get("ram")
-    # gpu = request.json.get("gpu")
-    # operating_system = request.json.get("operatingSystem")
-    # weight = request.json.get("weight")
-    # touch_screen = request.json.get("touchScreen")
-    # resolution = request.json.get("resolution")
-    # cpu = request.json.get("cpu")
-    # clock_rate = request.json.get("clockRate")
-    # ssd = request.json.get("SSD")
-    # hdd = request.json.get("HDD")
-    # hybrid = request.json.get("Hybrid")
-    # flash_storage = request.json.get("FlashStorage")
-
-    req_data = request.json # data will be in the correct order (from the frontend)
-    print(req_data)
-
-    df = pd.DataFrame(req_data, index=[0]) # Converts dictionary into a dataframe
-
-    encoded_df = pd.get_dummies(df) # We encode our dataframe as 
-
-    # Interpolate the data if its 0. For example, if weight is 0, replace it with the mean of the weight data.
-    return jsonify({"prediction": "Testing"}), 201
+# Initialize the app and the routes
+init_laptop_route(app)
+init_diabeties_route(app)
 
 if __name__ == "__main__":
     app.run(debug=True)

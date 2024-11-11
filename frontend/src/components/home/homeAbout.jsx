@@ -1,7 +1,7 @@
 import React from 'react';
 import aboutSection from '../../../public/aboutData';
 
-const homeAbout = () => {
+const HomeAbout = () => {
     return (
         <div
             className='bg-gradient-to-b from-slate-200 to-blue-100 flex justify-center 
@@ -22,7 +22,6 @@ const homeAbout = () => {
                 })}
             </div>
         </div>
-    );
     );
 };
 
