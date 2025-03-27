@@ -13,7 +13,7 @@ const Sidebar = () => {
     return (
         <>
             {/* Navbar */}
-            <nav className="bg-[#1e3a8a] h-16 flex items-center px-6 shadow-md">
+            <nav className="bg-[#1D3461] h-16 flex items-center px-6 shadow-md">
                 <button 
                     onClick={showSidebar} 
                     className="text-white text-2xl hover:scale-110 transition duration-500"
@@ -33,10 +33,10 @@ const Sidebar = () => {
                 )}
 
                 {/* Sidebar */}
-                <aside className="w-64 h-full bg-[#1e3a8a] bg-opacity-90 backdrop-blur-md text-white shadow-lg flex flex-col">
+                <aside className="w-64 h-full bg-[#1F487E] bg-opacity-90 backdrop-blur-md text-white shadow-lg flex flex-col">
                     {/* Close Button */}
                     <div className="p-4 flex justify-end">
-                        <button onClick={showSidebar} className="text-white text-2xl hover:scale-110 transition duration-500">
+                        <button onClick={showSidebar} className="text-white text-2xl hover:scale-110 transition duration-300">
                             <AiOutlineClose />
                         </button>
                     </div>
