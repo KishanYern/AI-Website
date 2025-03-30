@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const SubMenu = ({ item }) => {
+const SubMenu = ({ item, showSidebar }) => {
     const [subnav, setSubnav] = useState(false);
 
     const showSubnav = (e) => {
         if (item.subNav) {
             e.preventDefault(); // Prevent navigation when submenu exists
             setSubnav(!subnav);
+        } else {
+            // If there's no submenu, close sidebar
+            showSidebar();
         }
     };
 
@@ -39,8 +42,9 @@ const SubMenu = ({ item }) => {
                     <Link 
                         to={subItem.path} 
                         key={index} 
+                        onClick={() => showSidebar()} // Ensure function runs properly
                         className="flex items-center pl-12 h-20 text-white text-lg 
-                                   bg-gray-800 hover:bg-[#376996] cursor-pointer"
+                                bg-gray-800 hover:bg-[#376996] cursor-pointer"
                     >
                         {subItem.icon}
                         <span className="ml-4">{subItem.title}</span>

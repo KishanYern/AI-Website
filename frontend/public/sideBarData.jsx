@@ -1,6 +1,7 @@
 import React from "react";
 import * as RiIcons from "react-icons/ri";
 import { IoHomeOutline } from "react-icons/io5";
+import { IoNewspaperOutline } from "react-icons/io5";
 import { CiLaptop } from "react-icons/ci";
 import { PiSyringe } from "react-icons/pi";
 import { RiLungsLine } from "react-icons/ri";
@@ -8,9 +9,14 @@ import { BsLungs } from "react-icons/bs";
 
 export const SidebarData = [
     {
+        title: "Home",
+        path: "/Home",
+        icon: <IoHomeOutline />,
+    },
+    {
         title: "About Us",
         path: "/AboutUs",
-        icon: <IoHomeOutline />,
+        icon: <IoNewspaperOutline />,
     },
     {
         title: "Models",

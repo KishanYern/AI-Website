@@ -3,6 +3,7 @@ import {
     Route,
     Navigate,
 } from "react-router-dom";
+import Home from './pages/home'
 import AboutUs from './pages/aboutUs';
 import Diabeties from './pages/diabeties';
 import Embolism from './pages/embolism';
@@ -16,7 +17,8 @@ function App() {
         <>
             <Sidebar />
             <Routes>
-                <Route path="/" element={<Navigate to="/AboutUs" />} />
+                <Route path="/" element={<Navigate to="/Home" />} />
+                <Route path='/Home' element={<Home />} />
                 <Route path='/AboutUs' element={<AboutUs />} />
                 <Route path='/models/Laptop' element={<Laptop />} />
                 <Route path='/models/Diabeties' element={<Diabeties />} />

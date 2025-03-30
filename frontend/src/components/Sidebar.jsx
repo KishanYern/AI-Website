@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { SidebarData } from "../../public/sideBarData.jsx";
@@ -8,19 +7,22 @@ import SubMenu from "./subMenu";
 const Sidebar = () => {
     const [sidebar, setSidebar] = useState(false);
 
-    const showSidebar = () => setSidebar(!sidebar);
+    const showSidebar = () => {
+        setSidebar(!sidebar)
+        console.log("side bar")
+    };
 
     return (
         <>
             {/* Navbar */}
-            <nav className="bg-[#1D3461] h-16 flex items-center px-6 shadow-md">
+            <nav className="bg-white h-16 flex items-center px-6 shadow-md">
                 <button 
                     onClick={showSidebar} 
-                    className="text-white text-2xl hover:scale-110 transition duration-500"
+                    className="text-black text-2xl hover:scale-110 transition duration-500"
                 >
                     <FaBars />
                 </button>
-                <h1 className="text-white text-lg md:text-xl mx-auto font-semibold tracking-wide">
+                <h1 className="text-black text-lg md:text-2xl mx-auto tracking-wide font-roboto font-semibold">
                     Machine Learning Prediction
                 </h1>
             </nav>
@@ -44,7 +46,7 @@ const Sidebar = () => {
                     {/* Sidebar Items */}
                     <nav className="flex-1 overflow-y-auto">
                         {SidebarData.map((item, index) => (
-                            <SubMenu item={item} key={index} />
+                            <SubMenu item={item} key={index} showSidebar={showSidebar} />
                         ))}
                     </nav>
                 </aside>
