@@ -1,27 +1,27 @@
 const modelCardData = [
     {
         title: "Laptop Price Prediction",
-        link: '/Laptop',
+        link: '/models/Laptop',
         key: 1
     },
     {
         title: "Diabeties Prediction",
-        link: '/Diabeties',
+        link: '/models/Diabeties',
         key: 2
     },
     {
         title: "Pulmonary Embolism Risk Predictor",
-        link: '/Embolism',
+        link: '/models/Embolism',
         key: 3
     },
     {
         title: "Lung Cancer Predictor",
-        link: '/Lung',
+        link: '/models/Lung',
         key: 4
     },
 ]
 
-const cpuList = [
+export const cpuList = [
     'AMD A10-Series 9600P',
     'AMD A10-Series 9620P',
     'AMD A10-Series A10-9620P',
@@ -115,12 +115,8 @@ const cpuList = [
     'Intel Xeon E3-1535M v6',
     'Samsung Cortex A72&A53'
 ]
-export const cpuListWithId = cpuList.map((cpu, index) => ({
-    id: index + 1,
-    name: cpu
-}));
 
-const graphicCards = [
+export const graphicCards = [
     'AMD FirePro W4190M',
     'AMD FirePro W4190M ',
     'AMD FirePro W5130M',
@@ -233,9 +229,10 @@ const graphicCards = [
     'Nvidia Quadro M620M'
 ]
 
-export const graphicCardsWithId = graphicCards.map((card, index) => ({
-    id: index + 1,
-    card: card
-}));
+export const companyList = ['Acer', 'Apple', 'Asus', 'Chuwi', 'Dell', 'Fujitsu', 'Google', 'HP', 'Huawei', 'Lenovo', 'LG', 'Mediacom', 'Microsoft', 'MSI', 'Razer', 'Samsung', 'Toshiba', 'Vero', 'Xiaomi']
+
+export const typeList = ['Convertible', 'Gaming', 'Netbook', 'Notebook', 'Ultrabook', 'Workstation']
+
+export const resolutionList = ['1366x768', '1440x900', '1600x900', '1920x1080', '1920x1200', '2160x1400', '2256x1504', '2304x1440', '2400x1600', '2560x1440', '2560x1600', '2736x1824', '2880x1800', '3200x1800']
 
 export default modelCardData;

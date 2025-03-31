@@ -11,7 +11,7 @@ const Home = () => {
         className="text-center p-6 max-w-lg"
       >
         <h1 className="text-4xl font-bold mb-4">Welcome to My AI Showcase</h1>
-        <p className="text-lg">Explore cutting-edge AI projects and innovations. Use the sidebar to navigate through different sections.</p>
+        <p className="text-lg">Learn more about this website and explore the models created. Use the sidebar to navigate through different sections.</p>
         <motion.div 
           className="mt-6 text-xl font-semibold text-blue-600"
           animate={{ x: [0, -5, 5, -5, 5, 0] }}

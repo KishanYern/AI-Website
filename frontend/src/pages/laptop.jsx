@@ -7,7 +7,7 @@ const Laptop = () => {
   const [warning, setWarning] = useState(true);
 
   return (
-    <div className='flex items-start justify-center flex-row bg-gray-300 pb-10 w-full min-h-screen relative'>
+    <div className='flex items-start justify-center flex-row bg-blue-100 pb-10 w-full min-h-screen relative'>
       <div className='flex-1'>
       {warning && (
                         <button onClick={() => setWarning(false)} className='w-full h-full px-[25%] text-center text-white bg-gray-800 flex flex-col gap-10 
@@ -25,7 +25,7 @@ const Laptop = () => {
             )}
           <LaptopForm />
           <div className="flex items-center justify-center">
-              <Link className='font-satoshi text-white text-3xl flex items-center justify-center mt-10 bg-slate-800 hover:bg-slate-500 duration-100 rounded-lg p-3' to={'/'}>
+              <Link className='font-satoshi text-white text-3xl flex items-center justify-center mt-10 bg-[#1F487E] hover:bg-[#376996] duration-100 rounded-lg p-3' to={'/'}>
                 Home page
               </Link>
           </div>

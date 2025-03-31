@@ -5,7 +5,7 @@ import { SidebarData } from "../../public/sideBarData.jsx";
 import SubMenu from "./subMenu";
 
 const Sidebar = () => {
-    const [sidebar, setSidebar] = useState(false);
+    const [sidebar, setSidebar] = useState(true);
 
     const showSidebar = () => {
         setSidebar(!sidebar)
@@ -22,18 +22,14 @@ const Sidebar = () => {
                 >
                     <FaBars />
                 </button>
-                <h1 className="text-black text-lg md:text-2xl mx-auto tracking-wide font-roboto font-semibold">
+                <h1 className="text-black text-lg md:text-3xl mx-auto tracking-wide font-roboto font-semibold">
                     Machine Learning Prediction
                 </h1>
             </nav>
 
-            {/* Sidebar with Overlay */}
+            {/* Sidebar */}
             <div className={`fixed inset-0 z-50 flex ${sidebar ? "translate-x-0" : "-translate-x-full"} transition-transform duration-500`}>
-                {/* Overlay */}
-                {sidebar && (
-                    <div className="fixed inset-0 bg-black bg-opacity-50" onClick={showSidebar}></div>
-                )}
-
+            
                 {/* Sidebar */}
                 <aside className="w-64 h-full bg-[#1F487E] bg-opacity-90 backdrop-blur-md text-white shadow-lg flex flex-col">
                     {/* Close Button */}
