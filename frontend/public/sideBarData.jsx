@@ -38,8 +38,8 @@ export const SidebarData = [
                 icon: <PiSyringe />,
             },
             {
-                title: "Pulmonary Embolism Risk Predictor",
-                path: "/models/Embolism",
+                title: "Medical Expense Predictor",
+                path: "/models/Medical-Expense",
                 icon: <RiLungsLine />,
             },
             {

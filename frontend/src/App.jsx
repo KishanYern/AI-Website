@@ -6,7 +6,7 @@ import {
 import Home from './pages/home'
 import AboutUs from './pages/aboutUs';
 import Diabeties from './pages/diabeties';
-import Embolism from './pages/embolism';
+import MedicalExpense from './pages/medicalExpense';
 import Laptop from './pages/laptop';
 import Lung from './pages/lung';
 import NotFound from './pages/notFound';
@@ -23,7 +23,7 @@ function App() {
                 <Route path='/AboutUs' element={<AboutUs />} />
                 <Route path='/models/Laptop' element={<Laptop />} />
                 <Route path='/models/Diabeties' element={<Diabeties />} />
-                <Route path='/models/Embolism' element={<Embolism />} />
+                <Route path='/models/Medical-Expense' element={<MedicalExpense />} />
                 <Route path='/models/Lung' element={<Lung />} />
                 <Route path='/sources' element={<Sources />} />
                 <Route path='*' element={<NotFound />} />

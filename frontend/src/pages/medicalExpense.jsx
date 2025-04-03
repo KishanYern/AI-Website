@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import EmbolismForm from '../components/modelForms/embolismForm';
+import ExpenseForm from '../components/modelForms/expenseForm';
 import { Link } from "react-router-dom";
 
 const diabeties = () => {
@@ -25,7 +25,7 @@ const diabeties = () => {
                             </div>
                         </button>
             )}
-          <EmbolismForm />
+          <ExpenseForm />
           <div className="flex items-center justify-center">
               <Link className='font-satoshi text-white text-3xl flex items-center justify-center mt-10 bg-slate-800 hover:bg-slate-500 duration-100 rounded-lg p-3' to={'/'}>
                 Home page
