@@ -43,7 +43,7 @@ const SubMenu = ({ item, showSidebar }) => {
                         to={subItem.path} 
                         key={index} 
                         onClick={() => showSidebar()} // Ensure function runs properly
-                        className="flex items-center pl-12 h-20 text-white text-lg 
+                        className="flex items-center pl-8 h-20 text-white text-lg 
                                 bg-gray-800 hover:bg-[#376996] cursor-pointer"
                     >
                         {subItem.icon}

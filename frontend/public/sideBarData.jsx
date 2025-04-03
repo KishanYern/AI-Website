@@ -4,7 +4,7 @@ import { IoHomeOutline } from "react-icons/io5";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { CiLaptop } from "react-icons/ci";
 import { PiSyringe } from "react-icons/pi";
-import { RiLungsLine } from "react-icons/ri";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { BsLungs } from "react-icons/bs";
 import { MdOutlineSource } from "react-icons/md";
 
@@ -30,22 +30,22 @@ export const SidebarData = [
             {
                 title: "Laptop Predictor",
                 path: "/models/Laptop",
-                icon: <CiLaptop />,
+                icon: <CiLaptop size={30} />,
             },
             {
                 title: "Diabeties Risk Predictor",
                 path: "/models/Diabeties",
-                icon: <PiSyringe />,
+                icon: <PiSyringe size={30} />,
             },
             {
                 title: "Medical Expense Predictor",
                 path: "/models/Medical-Expense",
-                icon: <RiLungsLine />,
+                icon: <FaRegMoneyBillAlt size={30} />,
             },
             {
                 title: "Lung Cancer Risk Predictor",
                 path: "/models/Lung",
-                icon: <BsLungs />
+                icon: <BsLungs size={30} />
             }
         ],
     },
