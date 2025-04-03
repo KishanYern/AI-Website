@@ -9,7 +9,6 @@ const Sidebar = () => {
 
     const showSidebar = () => {
         setSidebar(!sidebar)
-        console.log("side bar")
     };
 
     return (
@@ -29,8 +28,6 @@ const Sidebar = () => {
 
             {/* Sidebar */}
             <div className={`fixed inset-0 z-50 flex ${sidebar ? "translate-x-0" : "-translate-x-full"} transition-transform duration-500`}>
-            
-                {/* Sidebar */}
                 <aside className="w-64 h-full bg-[#1F487E] bg-opacity-90 backdrop-blur-md text-white shadow-lg flex flex-col">
                     {/* Close Button */}
                     <div className="p-4 flex justify-end">

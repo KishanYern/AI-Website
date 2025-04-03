@@ -21,7 +21,7 @@ const SubMenu = ({ item, showSidebar }) => {
                 to={item.subNav ? "#" : item.path} // Prevents navigation when subnav exists
                 onClick={showSubnav}
                 className="flex justify-between items-center p-5 text-lg text-blue-200 
-                           hover:bg-gray-800 hover:border-l-4 hover:border-[#376996] cursor-pointer"
+                           hover:bg-gray-800 hover:border-l-4 hover:border-[#376996] transition duration-200 cursor-pointer"
             >
                 <div className="flex items-center">
                     {item.icon}
@@ -42,9 +42,9 @@ const SubMenu = ({ item, showSidebar }) => {
                     <Link 
                         to={subItem.path} 
                         key={index} 
-                        onClick={() => showSidebar()} // Ensure function runs properly
+                        onClick={() => showSidebar()}
                         className="flex items-center pl-8 h-20 text-white text-lg 
-                                bg-gray-800 hover:bg-[#376996] cursor-pointer"
+                                bg-gray-800 hover:bg-[#376996] transition duration-200 cursor-pointer"
                     >
                         {subItem.icon}
                         <span className="ml-4">{subItem.title}</span>
