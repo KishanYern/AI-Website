@@ -11,6 +11,7 @@ import Laptop from './pages/laptop';
 import Lung from './pages/lung';
 import NotFound from './pages/notFound';
 import Sidebar from './components/Sidebar';
+import Sources from "./pages/sources";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 <Route path='/models/Diabeties' element={<Diabeties />} />
                 <Route path='/models/Embolism' element={<Embolism />} />
                 <Route path='/models/Lung' element={<Lung />} />
+                <Route path='/sources' element={<Sources />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
         </>
