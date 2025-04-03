@@ -7,7 +7,7 @@ const diabeties = () => {
   const [warning, setWarning] = useState(true);
 
   return (
-    <div className='flex items-start justify-center flex-row bg-gray-300 pb-10 w-full min-h-screen relative'>
+    <div className='flex items-start justify-center flex-row bg-blue-100 pb-10 w-full min-h-screen relative'>
       <div className='flex-1'>
       {warning && (
                         <button onClick={() => setWarning(false)} className='w-full h-full px-[25%] text-center text-white bg-gray-800 flex flex-col gap-10 
@@ -16,8 +16,8 @@ const diabeties = () => {
                             Before You Start
                             </div>
                             <div className='text-3xl text-center px-4 opacity-95'>
-                            Please note that this model should not replace any professional appraisal. The results generated are based on our learning and may not 
-                            be 100% accurate. Always consult a qualified professional for precise evaluations.
+                            Please note that this model should not replace any professional medical help. The results generated are based on our learning and may not 
+                            be 100% accurate. Always consult a qualified professional for precise evaluations and please see a doctor if serious medical problems occur.
                             <br />
                             The dataset used to train this model is originally from the National Institute of Diabetes and Digestive and Kidney
                             Diseases. The objective of the dataset is to diagnostically predict whether a patient has diabetes,

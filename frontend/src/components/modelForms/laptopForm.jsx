@@ -350,7 +350,7 @@ function LaptopForm() {
                             </div>
                             <div className="mt-6 pt-4 border-t border-gray-700 text-sm text-gray-500 flex justify-between">
                                 <span>🤖 Robot Approved</span>
-                                <span>✅ Accuracy: 94.7%</span>
+                                <span>✅ Accuracy: 84.6%</span>
                             </div>
                         </div>
                     </div>

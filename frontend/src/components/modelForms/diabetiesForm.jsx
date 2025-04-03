@@ -38,12 +38,12 @@ function DiabetiesForm() {
             skinThickness <= 0 ||
             insulin <= 0 ||
             bmi <= 0 ||
-            diabetesRisk <= 0 ||
+            diabetesRisk <= 0 || diabetesRisk > 1 ||
             age <= 0
         ) {
             setError(true);
             setErrorText(
-                'Please ensure all numeric values are greater than zero.'
+                'Please ensure all numeric values are greater than zero or adhere to the guidelines.'
             );
             return false;
         }
@@ -100,7 +100,7 @@ function DiabetiesForm() {
     };
 
     return (
-        <div className='max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md mt-10 relative'>
+        <div className='max-w-3xl mx-auto p-8 rounded-lg shadow-md mt-10 relative font-semibold'>
             <Tooltip
                 message={{
                     title: 'Before You Start',
@@ -290,12 +290,38 @@ function DiabetiesForm() {
                         {errorText}
                     </div>
                 )}
-                {output && (
-                    <div className='md:col-span-2 text-green-600 text-center mt-4'>
-                        Predicted Risk: {output}
-                    </div>
-                )}
             </form>
+            {output && (
+                <div className="mt-6 ml-10 w-full max-w-md">
+                    <div className="bg-gray-800 p-4 rounded-t-xl flex items-center gap-2">
+                        <div className="h-3 w-3 rounded-full bg-red-500"></div>
+                        <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
+                        <div className="h-3 w-3 rounded-full bg-green-500"></div>
+                        <div className="text-white text-sm ml-2">Diabeties Risk Predictor 🤖</div>
+                    </div>
+                    <div className="bg-gray-900 text-green-400 p-6 rounded-b-xl font-mono border-t-0 shadow-lg">
+                        <div className="flex items-center mb-4">
+                            <span className="text-2xl mr-2">🤖</span>
+                            <span className="text-xl">PREDICTION_RESULT.exe</span>
+                        </div>
+                        <div className="grid grid-cols-3 gap-4 items-center">
+                            <div className="col-span-1 text-right">
+                                <span className="text-4xl">💻</span>
+                            </div>
+                            <div className="col-span-2">
+                                <div className="text-sm text-gray-400">Predicted Risk</div>
+                                <div className="text-3xl font-bold text-white flex items-center">
+                                    {output}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="mt-6 pt-4 border-t border-gray-700 text-sm text-gray-500 flex justify-between">
+                            <span>🤖 Robot Approved</span>
+                            <span>✅ Accuracy: 89.42%</span>
+                        </div>
+                    </div>
+                </div>
+            )} 
         </div>
     );
 }

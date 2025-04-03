@@ -6,6 +6,7 @@ import { CiLaptop } from "react-icons/ci";
 import { PiSyringe } from "react-icons/pi";
 import { RiLungsLine } from "react-icons/ri";
 import { BsLungs } from "react-icons/bs";
+import { MdOutlineSource } from "react-icons/md";
 
 export const SidebarData = [
     {
@@ -48,4 +49,9 @@ export const SidebarData = [
             }
         ],
     },
+    {
+        title: 'Sources',
+        path: "/sources",
+        icon: <MdOutlineSource />
+    }
 ];
