@@ -15,6 +15,7 @@ function InsuranceForm() {
     const [errorText, setErrorText] = useState('');
     const [output, setOutput] = useState();
 
+    // Reset the form to the default values.
     const resetForm = () => {
         setAge(40);
         setSex('male');
@@ -27,6 +28,7 @@ function InsuranceForm() {
         setOutput();
     };
 
+    // Ensure business rules are followed.
     const validateForm = () => {
         if (
             age <= 0 ||
@@ -42,6 +44,7 @@ function InsuranceForm() {
         return true;
     };
 
+    // Create form data and call the getResult function to set the Output/Error.
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -59,6 +62,7 @@ function InsuranceForm() {
         getResult(formData);
     };
 
+    // Call the backend to retrieve the value predicted by the model.
     const getResult = async (data) => {
         try {
             // const response = await fetch(
@@ -143,6 +147,19 @@ function InsuranceForm() {
                 </div>
 
                 <div>
+                    <Tooltip
+                        message={{
+                            title: 'BMI',
+                            text: 'Body mass index is a value derived from the mass and height of a person. The BMI is defined as the body mass divided by \
+                            the square of the body height, and is expressed in units of kg/m², resulting from mass in kilograms and height in metres. It can \
+                            be found using an online calculator',
+                        }}
+                    >
+                        <HiOutlineQuestionMarkCircle
+                            className='absolute right-0'
+                            size={20}
+                        />
+                    </Tooltip>
                     <label className='block font-medium text-gray-700 mb-2'>
                         BMI (kg/m²)
                     </label>
