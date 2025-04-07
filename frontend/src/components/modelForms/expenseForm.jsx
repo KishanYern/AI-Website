@@ -80,9 +80,8 @@ function InsuranceForm() {
                 throw new Error('Network response was not ok');
             }
 
-            // const result = await response.json();
-            // setOutput(result.prediction);
-            setOutput(11000.5347);
+            const result = await response.json();
+            setOutput(result.prediction);
             setError(false);
         } catch (error) {
             setError(true);
@@ -228,7 +227,7 @@ function InsuranceForm() {
                         type='submit'
                         className='w-full bg-blue-600 text-white font-semibold p-3 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500'
                     >
-                        Predict Insurance Cost
+                        Predict Medical Expense
                     </button>
                     <button
                         type='button'
@@ -251,7 +250,7 @@ function InsuranceForm() {
                         <div className="h-3 w-3 rounded-full bg-red-500"></div>
                         <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
                         <div className="h-3 w-3 rounded-full bg-green-500"></div>
-                        <div className="text-white text-sm ml-2">Insurance Predictor 🤖</div>
+                        <div className="text-white text-sm ml-2">Medical Expense Predictor 🤖</div>
                     </div>
                     <div className="bg-gray-900 text-green-400 p-6 rounded-b-xl font-mono border-t-0 shadow-lg">
                         <div className="flex items-center mb-4">
