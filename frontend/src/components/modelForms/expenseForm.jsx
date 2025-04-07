@@ -65,20 +65,20 @@ function InsuranceForm() {
     // Call the backend to retrieve the value predicted by the model.
     const getResult = async (data) => {
         try {
-            // const response = await fetch(
-            //     'http://localhost:5000/api/Insurance-Model',
-            //     {
-            //         method: 'POST',
-            //         headers: {
-            //             'Content-Type': 'application/json',
-            //         },
-            //         body: JSON.stringify(data),
-            //     }
-            // );
+            const response = await fetch(
+                'http://localhost:5000/api/Medical-Expenses',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                }
+            );
 
-            // if (!response.ok) {
-            //     throw new Error('Network response was not ok');
-            // }
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
 
             // const result = await response.json();
             // setOutput(result.prediction);
