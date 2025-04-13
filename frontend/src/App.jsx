@@ -8,7 +8,7 @@ import AboutUs from './pages/aboutUs';
 import Diabeties from './pages/diabeties';
 import MedicalExpense from './pages/medicalExpense';
 import Laptop from './pages/laptop';
-import Lung from './pages/lung';
+import LungCancer from './pages/lungCancer';
 import NotFound from './pages/notFound';
 import Sidebar from './components/Sidebar';
 import Sources from "./pages/sources";
@@ -24,7 +24,7 @@ function App() {
                 <Route path='/models/Laptop' element={<Laptop />} />
                 <Route path='/models/Diabeties' element={<Diabeties />} />
                 <Route path='/models/Medical-Expense' element={<MedicalExpense />} />
-                <Route path='/models/Lung' element={<Lung />} />
+                <Route path='/models/Lung' element={<LungCancer />} />
                 <Route path='/sources' element={<Sources />} />
                 <Route path='*' element={<NotFound />} />
             </Routes>
