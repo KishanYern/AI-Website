@@ -23,7 +23,7 @@ const Sidebar = () => {
           <FaBars />
         </button>
         <h1 className="text-black text-xl md:text-3xl mx-auto tracking-wider font-semibold">
-          Machine Learning Prediction
+            AI Showcase
         </h1>
       </nav>
 
