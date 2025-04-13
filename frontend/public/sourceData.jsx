@@ -17,6 +17,10 @@ const sourceDataList = [
     {
         title: "Medical Expense Training Dataset",
         link: 'https://www.kaggle.com/datasets/awaiskaggler/insurance-csv'
+    },
+    {
+        title: "Lung Cancer Risk Training Dataset",
+        link: 'https://www.kaggle.com/datasets/ajisofyan/survey-lung-cancer'
     }
 ]
 
